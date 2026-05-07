@@ -5,6 +5,7 @@ import cors from "cors";
 import yahooFinance from "yahoo-finance2";
 
 const yf = new (yahooFinance as any)();
+const yf = yahooFinance;
 
 const normalizeTicker = (ticker: string) => ticker.replace(/\./g, "-");
 
@@ -22,6 +23,7 @@ async function startServer() {
       const [quote, summary] = await Promise.all([
         yf.quote(ticker),
         (yf.quoteSummary(ticker, { modules: ["assetProfile"] }) as any).catch(() => null)
+        yf.quoteSummary(ticker, { modules: ["assetProfile"] }).catch(() => null)
       ]);
 
       if (!quote) return res.status(404).json({ error: "Stock not found" });
@@ -31,6 +33,10 @@ async function startServer() {
         longBusinessSummary: summary?.assetProfile?.longBusinessSummary || null
       });
     } catch (error: any) {
+        ...quote,
+        longBusinessSummary: summary?.assetProfile?.longBusinessSummary || null
+      });
+    } catch (error) {
       res.status(500).json({ error: error.message });
     }
   });

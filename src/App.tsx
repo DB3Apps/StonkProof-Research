@@ -1,8 +1,27 @@
+import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   return (
     <>
+      <div className="app">
+        <header>
+          <h1>StonkProof Research</h1>
+          <p>Advanced AI-driven market intelligence research lab.</p>
+        </header>
+        <main>
+          <section>
+            <h2>Welcome to StonkProof Research</h2>
+            <p>Your advanced platform for AI-driven market intelligence.</p>
+          </section>
+        </main>
+      </div>
+      <Analytics />
+    </>
+  )
+}
+
+export default App
       <div className="min-h-screen bg-gray-100">
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
